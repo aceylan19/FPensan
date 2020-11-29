@@ -17,9 +17,13 @@
 
       <li *ngFor="let menu of menuList" class="nav-item" [ngClass]="{'dropdown':menu.submenus != null}">
         <a *ngIf="menu.submenus != null"
-           class="nav-link dropdown-toggle"
+           class="nav-link nav-margin dropdown-toggle"
            id="accountDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-           translate="{{menu.text}}"> </a>
+           translate="{{menu.text}}"><i class="{{menu.icon}}"style="margin-right:5px;"></i>  {{menu.text}}
+          </a>
+
+          
+
         <ul class="dropdown-menu" aria-labelledby="accountDropDown" *ngIf="menu.submenus != null"
         style="width: 200px">
           <li *ngFor="let ss of menu.submenus;"

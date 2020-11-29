@@ -4,7 +4,91 @@ export class EnumsList {
 // -- Menu Items
   public static menuItems = [
     {
-      text: 'settings', url: '#', submenus: [
+      text: 'Order',icon:'fas fa-clipboard-check', url: '#', submenus: [
+        {
+          text: 'translations', url: null, submenus: [
+            {text: 'languages', url: '/main/language-list'},
+            {text: 'static_translations', url: '/main/static-translation'},
+            {text: 'dynamic_translations', url: '/main/dynamic-translation'},
+            {text: 'enum_translations', url: '/main/enum-translation'}
+          ]
+        },
+        {
+          text: 'system', url: null, submenus: [
+            {text: 'file_types', url: '/main/file-type-list'},
+            {text: 'countries', url: '/main/country-list'},
+            {text: 'message_accounts', url: '/main/message-account-list'},
+            {text: 'message_templates', url: '/main/message-template-list'},
+            {text: 'system_parameters', url: '/main/sys-parameters'}
+          ]
+        },
+        {
+          text: 'api', url: null, submenus: [
+            {text: 'api_services', url: '/main/api-service-list'},
+            {text: 'endpoints', url: '/main/api-endpoint-list'},
+            {text: 'api_messages', url: '/main/api-message-list'},
+          ]
+        }
+      ]
+    },
+    {
+      text: 'Account',icon:'fas fa-clipboard-check', url: '#', submenus: [
+        {
+          text: 'translations', url: null, submenus: [
+            {text: 'languages', url: '/main/language-list'},
+            {text: 'static_translations', url: '/main/static-translation'},
+            {text: 'dynamic_translations', url: '/main/dynamic-translation'},
+            {text: 'enum_translations', url: '/main/enum-translation'}
+          ]
+        },
+        {
+          text: 'system', url: null, submenus: [
+            {text: 'file_types', url: '/main/file-type-list'},
+            {text: 'countries', url: '/main/country-list'},
+            {text: 'message_accounts', url: '/main/message-account-list'},
+            {text: 'message_templates', url: '/main/message-template-list'},
+            {text: 'system_parameters', url: '/main/sys-parameters'}
+          ]
+        },
+        {
+          text: 'api', url: null, submenus: [
+            {text: 'api_services', url: '/main/api-service-list'},
+            {text: 'endpoints', url: '/main/api-endpoint-list'},
+            {text: 'api_messages', url: '/main/api-message-list'},
+          ]
+        }
+      ]
+    },
+    {
+      text: 'Stock',icon:'fas fa-clipboard-check', url: '#', submenus: [
+        {
+          text: 'translations', url: null, submenus: [
+            {text: 'languages', url: '/main/language-list'},
+            {text: 'static_translations', url: '/main/static-translation'},
+            {text: 'dynamic_translations', url: '/main/dynamic-translation'},
+            {text: 'enum_translations', url: '/main/enum-translation'}
+          ]
+        },
+        {
+          text: 'system', url: null, submenus: [
+            {text: 'file_types', url: '/main/file-type-list'},
+            {text: 'countries', url: '/main/country-list'},
+            {text: 'message_accounts', url: '/main/message-account-list'},
+            {text: 'message_templates', url: '/main/message-template-list'},
+            {text: 'system_parameters', url: '/main/sys-parameters'}
+          ]
+        },
+        {
+          text: 'api', url: null, submenus: [
+            {text: 'api_services', url: '/main/api-service-list'},
+            {text: 'endpoints', url: '/main/api-endpoint-list'},
+            {text: 'api_messages', url: '/main/api-message-list'},
+          ]
+        }
+      ]
+    },
+    {
+      text: 'Settings',icon:'fas fa-clipboard-check', url: '#', submenus: [
         {
           text: 'translations', url: null, submenus: [
             {text: 'languages', url: '/main/language-list'},

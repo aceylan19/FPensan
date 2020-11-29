@@ -1355,7 +1355,7 @@ select.form-control:not([size]):not([multiple]) {
 
 .top-header {
   background-color: #ffffff;
-  border-bottom: 2px solid #e6383e;
+  border-bottom: 2px solid #0f0e9f;
   box-shadow: -2px 1px 8px #888888;
   border-top: 1px solid #e0e0e0;
 }
