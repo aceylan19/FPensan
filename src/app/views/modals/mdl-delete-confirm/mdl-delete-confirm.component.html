@@ -1,0 +1,35 @@
+<ng-template #content let-c="close" let-d="dismiss" style="height: 300px">
+  <div class="modal-body">
+    <div class="close-button-container"
+         (click)="close()">
+      <div class="display-table-cell">
+        <img src="../../../../assets/images/close.jpg" height="15"
+             width="15">
+      </div>
+    </div>
+    <p translate="are_you_sure_delete" class="text-center"></p>
+    <div class="text-center">
+      <button class="btn btn-primary mr-3" (click)="onClickYes()" translate="yes"></button>
+      <button type="submit" class="btn btn-default" (click)="d('Cross click')" translate="no"></button>
+    </div>
+  </div>
+</ng-template>
+&nbsp;
+<button type="button" class="btn btn-default" (click)="open(content)"
+        *ngIf="(deleteAllPhoto==null || deleteAllPhoto==false) && (rowButton==null || !rowButton) && buttonText==null"
+        [disabled]="buttonDisable" translate="delete"></button>
+<img src="../../../../assets/images/remove.png" height="20" width="20" style="cursor: pointer"
+     *ngIf="(deleteAllPhoto==null || deleteAllPhoto==false)  && rowButton"
+     (click)="open(content)"
+/>
+
+<button class="btn btn-danger float-right"
+        *ngIf="deleteAllPhoto"
+        (click)="open(content)"
+        [disabled]="buttonDisable"
+>
+  <img src="../../../../../assets/images/delete_photo.png" height="20" width="25" style="float:
+                      left"/>
+  <span translate="delete"></span>
+
+</button>

@@ -1,0 +1,65 @@
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="screen-title">
+        <div>
+          <span translate="api_services"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <a routerLink="/main/api-service-details"
+         type="button" class="btn btn-new">
+        <i class="glyphicon glyphicon-plus"></i><span translate="new"></span>
+      </a>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label translate="search"></label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="requestParams.SearchText"
+                 (keydown.enter)="onSearch()"
+                 name="search"
+                 autocomplete="off">
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button class="btn btn-send" translate="search"
+                style="margin-top: 20px"
+                (click)="onSearch()"></button>
+      </div>
+    </div>
+    <table class="table table-bordered table-detailed" border="1">
+      <thead >
+      <tr>
+        <th scope="col" translate="service_code" ></th>
+        <th scope="col" translate="service_name" ></th>
+        <th scope="col" width="100"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let l of apiServiceService.serviceList"
+          (click)="onGotoDetail(l)"
+      >
+        <td>{{l.ServiceCode}}</td>
+        <td>{{l.ServiceName}}</td>
+        <td>
+          <a
+            [routerLink]="['/main/api-service-details', l.APIServiceId]"
+            type="button" class="btn  btn-detail">
+            <span translate="detail"></span>
+          </a>
+        </td>
+      </tr>
+      <tr *ngIf="apiServiceService.serviceList.length==0">
+        <td colspan="3" >
+          <span translate="there_is_no_data"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

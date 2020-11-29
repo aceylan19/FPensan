@@ -1,0 +1,49 @@
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-2 col-xs-12">
+      <div class="screen-title">
+        <div>
+          <span translate="message_templates"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <a routerLink="/main/message-template"
+         type="button" class="btn btn-new"  translate="new">
+      </a>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <table class="table table-bordered table-detailed" border="1">
+      <thead >
+      <tr>
+        <th scope="col" translate="message_template_type" ></th>
+        <th scope="col" translate="message_account_name"></th>
+        <th scope="col" translate="template_name"></th>
+        <th scope="col" width="100px"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let mt of managementService.messageTemplateList"
+        (click)="onGotoDetail(mt)"
+        >
+        <td>{{mt.TemplateTypeDesc}}</td>
+        <td>{{mt.DBMessageAccountName}}</td>
+        <td>{{mt.TemplateName}}</td>
+        <td>
+          <a
+            [routerLink]="['/main/message-template', mt.DBMessageTemplateId]"
+            type="button" class="btn  btn-detail" translate="detail">
+          </a>
+        </td>
+      </tr>
+
+      <tr *ngIf="managementService.messageTemplateList.length==0">
+        <td colspan="4" >
+          <span translate="there_is_no_data"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

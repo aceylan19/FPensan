@@ -1,0 +1,177 @@
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <ngb-alert *ngIf="apiServiceService.savedSuccessFully" type="success"
+                 (close)="apiServiceService.savedSuccessFully = null"
+                 style="margin-left: -15px;"
+      ><h4><i
+        class="icon fa fa-check"></i><span translate="success"></span></h4>
+        <span translate="successfully_saved"></span>
+      </ngb-alert>
+    </div>
+    <br>
+    <div class="col-sm-12">
+      <a [routerLink]="['/main/api-endpoint-list']" class="btn btn-unchoosed">
+        <i class="fas fa-arrow-left"></i> &nbsp; <span translate="turn_to_list"></span>
+      </a>
+      <br>
+      <br>
+    </div>
+    <div class="col-sm-2 col-6">
+      <div class="screen-title">
+        <div>
+          <span translate="endpoint"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <button for="form"
+              type="button" class="btn btn-send"
+              [ladda]="apiServiceService.calledEndPoint"
+              (click)="onSubmit()">
+        <span
+          translate="save"></span>
+      </button>&nbsp;
+
+      <app-mdl-delete-confirm
+        [buttonDisable]="apiEndpointId == null"
+        (onConfirmDelete)="onDeleteConfirm()"></app-mdl-delete-confirm>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <div class="row">
+      <div class="col-lg-8 offset-2">
+        <form (ngSubmit)="onSubmit()" id="form">
+
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="api_service"></label>
+                <ng-multiselect-dropdown
+                  id="productionLine"
+                  [settings]="baseCtrl.apiServiceComboboxSetting"
+                  [data]="apiServiceService.serviceList"
+                  [(ngModel)]="apiServiceService.selectedAPIServiceIds"
+                  (onSelect)="onSelectApiService($event)"
+                  (onDeSelect)="onDeSelectApiService()"
+                  name="productionLine"
+                  [placeholder]="managementService.onGetTranslationByResourceName('choose')"
+                ></ng-multiselect-dropdown>
+                <div *ngIf="baseCtrl.checkField(apiServiceService.apiEndpointForm.APIServiceId) && submitted"
+                     class="error-required" translate="field_required"></div>
+
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label translate="endpoint_code"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="apiServiceService.apiEndpointForm.EndpointCode.Value"
+                       name="endpointCode"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(apiServiceService.apiEndpointForm.EndpointCode) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(apiServiceService.apiEndpointForm.EndpointCode) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label translate="endpoint_name"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="apiServiceService.apiEndpointForm.EndpointName.Value"
+                       name="serviceName"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(apiServiceService.apiEndpointForm.EndpointName) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(apiServiceService.apiEndpointForm.EndpointName) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label translate="authorization"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="apiServiceService.apiEndpointForm.Authorization.Value"
+                       name="authorization"
+                       [textMask]="{mask: baseCtrl.countMask}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <app-mdl-new-message></app-mdl-new-message>
+              <table class="table table-bordered table-detailed" border="1">
+                <thead>
+                <tr>
+                  <th translate="level" width="120"></th>
+                  <th translate="default_message"></th>
+                  <th width="300">
+                    <div translate="api_message" style="float: left"></div>
+                    <div class="text-right">
+                      <i class="fa fa-plus text-right"
+                         (click)="onOpenUpdateMessage()"
+                         style="cursor: pointer;right: 0;"></i>
+                    </div>
+                  </th>
+                  <th width="20"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let ap of apiServiceService.apiEndpointForm.APIResponses.Value;let i=index">
+                  <td>
+                    <input type="text" class="form-control" [(ngModel)]="ap.Level.Value"
+                           (change)="onAddNewAPIResponse()"
+                           [ngClass]="{'error-input-border':i!=apiServiceService.apiEndpointForm.APIResponses.Value.length-1 &&
+                    baseCtrl.checkField(ap.Level) && submitted}"
+                           [textMask]="{mask: baseCtrl.countMask}"
+                           name="level{{i}}">
+                    <div *ngIf="i!=apiServiceService.apiEndpointForm.APIResponses.Value.length-1 &&
+                    baseCtrl.checkField(ap.Level) && submitted"
+                         class="error-required" translate="field_required">
+                    </div>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" [(ngModel)]="ap.DefaultMessage.Value"
+                           [ngClass]="{'error-input-border':i!=apiServiceService.apiEndpointForm.APIResponses.Value.length-1 &&
+                    baseCtrl.checkField(ap.DefaultMessage) && submitted}"
+                           (change)="onAddNewAPIResponse()" name="defaultMessage{{i}}">
+                    <div *ngIf="i!=apiServiceService.apiEndpointForm.APIResponses.Value.length-1 &&
+                    baseCtrl.checkField(ap.DefaultMessage) && submitted"
+                         class="error-required" translate="field_required">
+                    </div>
+                  </td>
+                  <td>
+
+                    <ng-multiselect-dropdown
+                      id="apiMessage{{i}}"
+                      name="apiMessage{{i}}"
+                      [settings]="baseCtrl.apiMessageComboboxSetting"
+                      [data]="apiServiceService.apiMessageList"
+                      [(ngModel)]="ap.SelectedAPIServiceIds.Value"
+                      (onSelect)="onSelectApiMessage($event, ap)"
+                      (onDeSelect)="onDeSelectApiMessage(ap)"
+                      name="productionLine"
+                      [placeholder]="managementService.onGetTranslationByResourceName('choose')"
+                    ></ng-multiselect-dropdown>
+                  </td>
+                  <td>
+
+                    <app-mdl-delete-confirm
+                      *ngIf="i!=apiServiceService.apiEndpointForm.APIResponses.Value.length-1"
+                      [rowButton]="rowButton"
+                      (onConfirmDelete)="onDeleteApiResponse(ap,i)"></app-mdl-delete-confirm>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

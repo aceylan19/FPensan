@@ -1,0 +1,112 @@
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <ngb-alert *ngIf="apiServiceService.savedSuccessFully" type="success"
+                 (close)="apiServiceService.savedSuccessFully = null"
+                 style="margin-left: -15px;"
+      ><h4><i
+        class="icon fa fa-check"></i><span translate="success"></span></h4>
+        <span translate="successfully_saved"></span>
+      </ngb-alert>
+    </div>
+    <br>
+    <div class="col-sm-12">
+      <a [routerLink]="['/main/api-service-list']" class="btn btn-unchoosed">
+        <i class="fas fa-arrow-left"></i> &nbsp; <span translate="turn_to_list"></span>
+      </a>
+      <br>
+      <br>
+    </div>
+    <div class="col-sm-2 col-6">
+      <div class="screen-title">
+        <div>
+          <span translate="api_services"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <button for="form"
+              type="button" class="btn btn-send"
+              [ladda]="apiServiceService.calledEndPoint"
+              (click)="onSubmit()">
+        <span
+          translate="save"></span>
+      </button>&nbsp;
+
+      <app-mdl-delete-confirm
+        [buttonDisable]="apiServiceId == null"
+        (onConfirmDelete)="onDeleteConfirm()"></app-mdl-delete-confirm>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <div class="row">
+      <div class="col-lg-6 offset-3">
+        <form (ngSubmit)="onSubmit()" id="form">
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label translate="api_service_code"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="apiServiceService.apiServiceForm.ServiceCode.Value"
+                       name="serviceCode"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(apiServiceService.apiServiceForm.ServiceCode) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(apiServiceService.apiServiceForm.ServiceCode) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label translate="api_service_name"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="apiServiceService.apiServiceForm.ServiceName.Value"
+                       name="serviceName"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(apiServiceService.apiServiceForm.ServiceName) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(apiServiceService.apiServiceForm.ServiceName) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <table class="table table-bordered table-detailed" border="1">
+                <thead>
+                <tr>
+                  <th translate="end_point_code" width="120"></th>
+                  <th translate="end_point_name"></th>
+                  <th width="20"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let ep of apiServiceService.apiServiceForm.Endpoints.Value;let i=index">
+                  <td>
+                    <input type="text" class="form-control" [(ngModel)]="ep.EndpointCode"
+                           (change)="onAddNewEndPoint()"
+                           name="endPointCode{{i}}">
+                  </td>
+                  <td>
+                    <input type="text" class="form-control" [(ngModel)]="ep.EndpointName"
+                           (change)="onAddNewEndPoint()" name="endPointName{{i}}">
+                  </td>
+                  <td>
+
+                    <app-mdl-delete-confirm
+                      *ngIf="i!=apiServiceService.apiServiceForm.Endpoints.Value.length-1"
+                      [rowButton]="rowButton"
+                      (onConfirmDelete)="onDeleteConfirmEndPoint(ep,i)"></app-mdl-delete-confirm>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+<div class="page-container">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <a [routerLink]="['/main/message-account-list']" class="btn btn-unchoosed">
+        <i class="fas fa-arrow-left"></i> &nbsp; <span translate="turn_to_list"></span>
+      </a>
+      <br>
+      <br>
+    </div>
+    <div class="col-sm-2">
+      <div class="screen-title">
+        <div>
+          <span translate="message_account"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <button for="form"
+              [ladda]="dbSystemService.calledEndPoint"
+              type="button" class="btn btn-danger"
+              data-style="expand-left"
+              (click)="onSubmit()">
+        <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span
+        translate="save"></span></button>&nbsp;
+      <app-mdl-delete-confirm
+        [buttonDisable]="dbMessageAccountId==null"
+        (onConfirmDelete)="onDeleteConfirm()"></app-mdl-delete-confirm>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <div class="row">
+      <div class="col-lg-6 offset-3">
+        <form (ngSubmit)="onSubmit()" id="form">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label translate="message_account_type"></label>
+                <ng-multiselect-dropdown
+                  id="messageAccountTypeSelection"
+                  [settings]="messageAccountComboboxSetting"
+                  [(ngModel)]="dbSystemService.selectedAccountTypes"
+                  [data]="dbSystemService.accountTypes"
+                  (onSelect)="onItemSelect($event)"
+                  name="accountType"
+                  [placeholder]="translationService.onGetTranslationByResourceName('choose')"
+                ></ng-multiselect-dropdown>
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageAccountForm.AccountType) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+              <div class="form-group">
+                <label translate="message_account_name"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="dbSystemService.messageAccountForm.AccountName.Value"
+                       name="accountName"
+                       (keydown.enter)="onSubmit()"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(dbSystemService.messageAccountForm.AccountName) && submitted}"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageAccountForm.AccountName) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+              <div class="form-group">
+                <label translate="sender"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="dbSystemService.messageAccountForm.SenderName.Value"
+                       name="senderName"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(dbSystemService.messageAccountForm.SenderName) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageAccountForm.SenderName) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+              <div class="form-group">
+                <label translate="email"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="dbSystemService.messageAccountForm.Email.Value"
+                       name="email"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(dbSystemService.messageAccountForm.Email) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageAccountForm.Email) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+              <div class="form-group">
+                <label translate="number"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="dbSystemService.messageAccountForm.Port.Value"
+                       (keydown.enter)="onSubmit()"
+                       name="port"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(dbSystemService.messageAccountForm.Port) && submitted}"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageAccountForm.Port) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label translate="server"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="dbSystemService.messageAccountForm.Host.Value"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(dbSystemService.messageAccountForm.Host) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       name="host"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageAccountForm.Host) && submitted"
+                     class="error-required" translate="field_required"></div>
+              </div>
+              <div class="form-group">
+                <label translate="user"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="dbSystemService.messageAccountForm.UserName.Value"
+                       (keydown.enter)="onSubmit()"
+                       name="userName"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(dbSystemService.messageAccountForm.UserName) && submitted}"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageAccountForm.UserName) && submitted"
+                     class="error-required" translate="field_required"></div>
+              </div>
+              <div class="form-group">
+                <label translate="password"></label>
+                <input type="password" class="form-control"
+                       (keydown.enter)="onSubmit()"
+                       [(ngModel)]="dbSystemService.messageAccountForm.Password.Value"
+                       name="password"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(dbSystemService.messageAccountForm.Password) && submitted}"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageAccountForm.Password) && submitted"
+                     class="error-required" translate="field_required"></div>
+              </div>
+              <div class="form-group">
+                <label translate="domain"></label>
+                <input type="text" class="form-control"
+                       (keydown.enter)="onSubmit()"
+                       [(ngModel)]="dbSystemService.messageAccountForm.Domain.Value"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(dbSystemService.messageAccountForm.Domain) && submitted}"
+                       name="domain"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageAccountForm.Domain) && submitted"
+                     class="error-required" translate="field_required"></div>
+              </div>
+              <div class="form-group">
+                <label translate="use_ssl"></label><br>
+                <input type="checkbox"
+                       [(ngModel)]="dbSystemService.messageAccountForm.UseSSL.Value"
+                       name="useSSL"
+
+                       autocomplete="off">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

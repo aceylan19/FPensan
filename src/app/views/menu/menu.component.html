@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-md navbar-light white-bg-menu top-header">
+  <button class="navbar-toggler" type="button"
+          style="float: left"
+          data-toggle="collapse"
+          aria-controls="navbarNavDropdown"
+          (click)="onClickMenuButton()"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand pb-2" href="/main/dashboard">
+    <img src="../../../assets/images/logo.png" height="30" width="200"/>
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+
+      <li *ngFor="let menu of menuList" class="nav-item" [ngClass]="{'dropdown':menu.submenus != null}">
+        <a *ngIf="menu.submenus != null"
+           class="nav-link dropdown-toggle"
+           id="accountDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+           translate="{{menu.text}}"> </a>
+        <ul class="dropdown-menu" aria-labelledby="accountDropDown" *ngIf="menu.submenus != null"
+        style="width: 200px">
+          <li *ngFor="let ss of menu.submenus;"
+              style="width: 200px"
+              [ngClass]="{'dropdown-submenu':ss.submenus != null}">
+            <a class="dropdown-item" routerLink="{{ss.url}}" translate="{{ss.text}}" *ngIf="ss.submenus == null"></a>
+            <a class="dropdown-item dropdown-toggle" translate="{{ss.text}}" *ngIf="ss.submenus != null"></a>
+            <ul class="dropdown-menu" *ngIf="ss.submenus != null">
+              <li><a class="dropdown-item" routerLink="{{sub.url}}" *ngFor="let sub of ss.submenus;"
+                     translate="{{sub.text}}"></a></li>
+            </ul>
+          </li>
+        </ul>
+        <a class="nav-link" href="#" translate="{{menu.text}}" routerLink="{{menu.url}}"
+           *ngIf="menu.submenus == null"></a>
+      </li>
+    </ul>
+
+  </div>
+  <ul class="navbar-nav justify-content-end">
+    <li class="nav-item dropdown" >
+      <a class="nav-link dropdown-toggle" id="userDropDown" data-toggle="dropdown" aria-haspopup="true"
+         aria-expanded="false"
+         translate="{{userTitle}}"> </a>
+      <ul class="dropdown-menu" aria-labelledby="userDropDown">
+        <li><a class="dropdown-item"
+
+               [routerLink]="['/main/change-password']"
+        ><i class="glyphicon glyphicon-user"></i>&nbsp;<span
+          translate="change_password"></span></a></li>
+        <li><a class="dropdown-item" href="#"><i class="glyphicon glyphicon-log-out"></i>&nbsp;<span
+          translate="logout"></span></a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown" >
+
+      <a class="nav-link dropdown-toggle" id="userDropDown" data-toggle="dropdown" aria-haspopup="true"
+         aria-expanded="false" style="float: right">
+          <span
+            translate="{{translationService.shownLanguageName}}"></span>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="notifyDropDown">
+        <li><a class="dropdown-item" (click)="changeLanguage(language.Id)"
+               *ngFor="let language of translationService.languageList">
+          {{language.LanguageName}}</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

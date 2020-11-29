@@ -1,0 +1,77 @@
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <ngb-alert *ngIf="dbSystemService.sysParamatersSuccessFullySaved" type="success"
+                 (close)="dbSystemService.sysParamatersSuccessFullySaved = null"
+                 style="margin-left: -15px;"
+      ><h4><i
+        class="icon fa fa-check"></i><span translate="success"></span> </h4>
+        <span translate="successfully_saved"></span>
+      </ngb-alert>
+    </div><br>
+    <div class="col-sm-2 col-xs-12">
+      <div class="screen-title">
+        <div>
+          <span translate="system_parameters"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <button
+        [ladda]="dbSystemService.calledEndPoint"
+        (click)="onSubmit()"
+        type="button" class="btn btn-danger">
+        <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;<span translate="save"></span>
+      </button>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <ngb-tabset>
+      <ngb-tab *ngFor="let sysTab of dbSystemService.sysParametersList"
+               title="{{sysTab.ParameterGroupName}}">
+        <ng-template ngbTabContent>
+          <table class="table table-detailed">
+            <thead>
+            <tr>
+              <th scope="col" translate="parameter"></th>
+              <th scope="col" translate="value"></th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let params of sysTab.Parameters">
+              <td scope="row">{{params.ParameterName}}</td>
+              <td>
+                <div class="form-group mb-0">
+                  <select name="" id="" *ngIf="params.ParameterType===1" class="form-control"
+                          [(ngModel)]="params.Value">
+                    <option value="null" translate="choose"></option>
+                    <option value="{{opt.Id}}" *ngFor="let opt of params.Options">{{opt.Description}}</option>
+                  </select>
+                  <input type="text" class="form-control" *ngIf="params.ParameterType===2"
+                         [(ngModel)]="params.Value">
+                  <input type="text"
+                         [textMask]="{mask: baseCtrl.countMask}"
+                         class="form-control" *ngIf="params.ParameterType===3" [(ngModel)]="params.Value">
+                  <input type="text"
+                         [textMask]="{mask: baseCtrl.countMask}"
+                         class="form-control" *ngIf="params.ParameterType===4" [(ngModel)]="params.Value">
+                  <input type="date" class="form-control" *ngIf="params.ParameterType===5"
+                         [(ngModel)]="params.Value">
+                  <input type="checkbox" *ngIf="params.ParameterType===6" [(ngModel)]="params.Value">
+                </div>
+              </td>
+              <td align="center">
+                <button class="btn btn-default" type="button" (click)="cleanInput(params)">
+                  <i class="fas fa-times"></i>
+                  <span translate="delete"></span>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-2 col-xs-12">
+      <div class="screen-title">
+        <div>
+          <span translate="message_accounts"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <a routerLink="/main/message-account"
+         type="button" class="btn btn-new">
+        <i class="glyphicon glyphicon-plus"></i><span translate="new"></span>
+      </a>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <table class="table table-bordered table-detailed" border="1">
+        <thead >
+          <tr>
+            <th scope="col" translate="message_account_type" ></th>
+            <th scope="col" translate="message_account_name"></th>
+            <th scope="col" translate="email"></th>
+            <th scope="col" translate="sender"></th>
+            <th scope="col" translate="server"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let messageAccount of dbSystemService.messageAccountList"
+              (click)="onGotoDetail(messageAccount)"
+            >
+            <td>
+              <span *ngIf="messageAccount.AccountType == 10" translate="email_smtp"></span>
+              <span *ngIf="messageAccount.AccountType == 15" translate="email_exchange"></span>
+              <span *ngIf="messageAccount.AccountType == 20" translate="sms"></span>
+            </td>
+            <td>{{messageAccount.AccountName}}</td>
+            <td>{{messageAccount.Email}}</td>
+            <td>{{messageAccount.SenderName}}</td>
+            <td>{{messageAccount.Host}}</td>
+            <td align="center">
+              <a
+                [routerLink]="['/main/message-account', messageAccount.DBMessageAccountId]"
+                type="button" class="btn  btn-detail">
+                <span translate="detail"></span>
+              </a>
+             </td>
+          </tr>
+          <tr *ngIf="dbSystemService.messageAccountList.length==0">
+            <td colspan="6" >
+              <span translate="there_is_no_data"></span>
+            </td>
+          </tr>
+
+        </tbody>
+    </table>
+  </div>
+</div>

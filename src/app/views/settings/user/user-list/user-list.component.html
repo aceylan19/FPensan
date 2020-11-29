@@ -1,0 +1,122 @@
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-2 col-6">
+      <div class="screen-title">
+        <div>
+          <span translate="users"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 col-6 text-right">
+      <a routerLink="/main/user"
+         type="button" class="btn btn-new">
+        <i class="glyphicon glyphicon-plus"></i><span translate="new"></span>
+      </a>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+
+
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label translate="user_type"></label>
+          <select [(ngModel)]="requestParams.userType" class="form-control" (change)="search()">
+            <option value="null" translate="all"></option>
+            <option *ngFor="let rs of managementService.userTypeList" value="{{rs.Id}}">{{rs.Description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label translate="search"></label>
+          <input type="text" class="form-control"
+                 (keydown.enter)="search()"
+                 [(ngModel)]="requestParams.searchText">
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button class="btn btn-send" translate="search"
+                style="margin-top: 20px"
+                (click)="search()"></button>
+      </div>
+    </div>
+    <table class="table table-bordered table-detailed" border="1">
+      <thead>
+      <tr>
+        <th scope="col" translate="user_type"></th>
+        <th scope="col" translate="user_code"></th>
+        <th scope="col" translate="name"></th>
+        <th scope="col" translate="phone_number"></th>
+        <th scope="col" translate="email"></th>
+        <th scope="col" translate="last_logged_time"></th>
+        <th scope="col" translate="status"></th>
+        <th scope="col" width="100"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of managementService.userList| sort:'UserTitle'
+      | slice: (page-1) * dataPerPage : (page-1) * dataPerPage + dataPerPage"
+          (click)="onGotoDetails(user)">
+        <td>{{user.UserTypeDesc}}</td>
+        <td>{{user.UserCode}}</td>
+        <td>{{user.UserTitle}}</td>
+        <td>{{user.PhoneNumber}}</td>
+        <td>{{user.Email}}</td>
+        <td>{{user.LastLogin | date: baseCtrl.dateTimeFormat}}</td>
+        <td>
+          <span *ngIf="user.IsActive" translate="yes"></span>
+          <span *ngIf="!user.IsActive" translate="no"></span>
+        </td>
+        <td align="center">
+          <a
+            [routerLink]="['/main/user',user.UserId]"
+            type="button" class="btn  btn-detail">
+            <span translate="detail"></span>
+          </a>
+        </td>
+      </tr>
+      <tr *ngIf="managementService.tableLoader== false && (managementService.userList==null ||
+        managementService.userList.length==0)">
+        <td colspan="100%">
+          <span translate="there_is_no_data"></span>
+        </td>
+      </tr>
+      <tr
+        *ngIf="managementService.tableLoader">
+        <td colspan="100%" align="center">
+
+          <img src="../../../../assets/images/loader.gif" height="20" width="20"/>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot *ngIf="managementService.userList?.length!=0">
+      <tr>
+        <td colspan="100%">
+          <div class="row">
+            <div class="col-7">
+              <ngb-pagination class="d-inline-block" [collectionSize]="managementService.userList.length"
+                              [pageSize]="dataPerPage"
+                              [maxSize]="baseCtrl.paginationPageSize"
+                              [(page)]="page" [boundaryLinks]="true">
+              </ngb-pagination>
+              <select class="w-25 ml-3 form-control form-inline d-inline-block"
+                      (change)="onShowValue($event.target.value)"
+                      name="itemsPerPage" id="itemsPerPage">
+                <option *ngFor="let pr of pageRecordCounts" value="{{pr.Id}}">{{pr.Description}}</option>
+              </select>
+            </div>
+            <div class="col-5 pt-2 text-right">
+                <span>
+                  {{dataPerPage * (page - 1) + 1}} - {{dataPerPage * page}}
+                  (<span translate="total"></span> {{managementService.userList.length}} <span
+                  translate="records"></span>)
+                </span>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

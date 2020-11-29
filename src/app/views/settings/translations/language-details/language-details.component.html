@@ -1,0 +1,106 @@
+<div class="page-container">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <a [routerLink]="['/main/language-list']" class="btn btn-unchoosed">
+        <i class="fas fa-arrow-left"></i> &nbsp; <span translate="turn_to_list"></span>
+      </a>
+      <br>
+      <br>
+    </div>
+    <div class="col-sm-2 col-xs-12">
+      <div class="screen-title">
+        <div>
+          <span translate="language"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <button for="form"
+              type="button" class="btn btn-send"
+              [ladda]="translationService.calledEndPoint"
+              translate="save"
+              (click)="onSubmit()">
+      </button>&nbsp;
+
+      <app-mdl-delete-confirm
+        (onConfirmDelete)="onDeleteConfirm()"></app-mdl-delete-confirm>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <div class="row">
+      <div class="col-lg-6 offset-3">
+        <form (ngSubmit)="onSubmit()" id="form">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="culture_name"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="translationService.languageFrom.CultureName.Value"
+                       name="cultureName"
+                       (keydown.enter)="onSubmit()"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(translationService.languageFrom.CultureName) && submitted}"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(translationService.languageFrom.CultureName) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="language_name"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="translationService.languageFrom.LanguageName.Value"
+                       name="languageName"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(translationService.languageFrom.LanguageName) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(translationService.languageFrom.LanguageName) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="short_name"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="translationService.languageFrom.ShortName.Value"
+                       name="shortName"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(translationService.languageFrom.ShortName) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(translationService.languageFrom.ShortName) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label translate="icon"></label><br>
+                <div class="files-bordered" style="height: 40px">
+                  <input type="file" style="display: none" id="icon"
+                         (change)="readThis($event)">
+                  <div class="row">
+                    <div class="col-sm-8" (click)="onOpenFileDialog()"
+                         style="cursor: pointer">
+                      <img src="{{translationService.languageIcon}}"
+                           style="margin-top: -12px;"
+                           width="24" height="24"
+                           *ngIf="translationService.languageIcon!=null">
+                      <span translate="there_is_no_image" *ngIf="translationService.languageIcon==null"></span>
+                      <span translate="choose_another_image" *ngIf="translationService.languageIcon!=null"></span>
+                    </div>
+                    <div class="col-sm-4" *ngIf="translationService.languageIcon!=null">
+                      <i class="fas fa-times" style="float: right" (click)="removeImage()" style="cursor: pointer;"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

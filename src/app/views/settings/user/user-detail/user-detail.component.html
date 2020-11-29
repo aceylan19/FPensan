@@ -1,0 +1,194 @@
+<div class="page-container">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <a [routerLink]="['/main/user-list']" class="btn btn-unchoosed">
+        <i class="fas fa-arrow-left"></i> &nbsp; <span translate="turn_to_list"></span>
+      </a>
+      <br>
+      <br>
+    </div>
+    <div class="col-sm-2">
+      <div class="screen-title">
+        <h5 translate="user"></h5>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <button for="form"
+              type="button" class="btn btn-danger"
+              [ladda]="managementService.calledEndPoint"
+              (click)="onSubmit()">
+
+        <i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;
+        <span
+          translate="save"></span>
+      </button>&nbsp;
+
+      <app-mdl-delete-confirm
+        (onConfirmDelete)="onDeleteConfirm()"></app-mdl-delete-confirm>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <div class="row">
+      <div class="col-lg-6 offset-3">
+        <form (ngSubmit)="onSubmit()" id="form">
+          <div class="row">
+            <div class="col-sm-8 offset-2">
+
+              <div class="form-group">
+                <label translate="job_title"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="managementService.userDetailsForm.JobTitle.Value"
+                       name="jobTitle"
+                       (keydown.enter)="onSubmit()"
+                        disabled
+                       autocomplete="off">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="user_type"></label>
+
+                <ng-multiselect-dropdown
+                  id="userTypeSelection"
+                  [settings]="baseCtrl.enumSelectionSetting"
+                  [(ngModel)]="managementService.selecetedUserTypes"
+                  [data]="managementService.userTypeList"
+                  (onSelect)="onSelectUserType($event)"
+                  (onDeSelect)="onDeSelectUserType()"
+                  name="userType"
+                  [placeholder]="managementService.onGetTranslationByResourceName('choose')"
+                ></ng-multiselect-dropdown>
+                <div *ngIf="(managementService.selecetedUserTypes == null || managementService.selecetedUserTypes.length==0) &&
+                submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="user_code"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="managementService.userDetailsForm.UserCode.Value"
+                       name="userCode"
+                       (keydown.enter)="onSubmit()"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(managementService.userDetailsForm.UserCode) && submitted}"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(managementService.userDetailsForm.UserCode) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="name"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="managementService.userDetailsForm.UserTitle.Value"
+                       name="name"
+                       (keydown.enter)="onSubmit()"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(managementService.userDetailsForm.UserTitle) && submitted}"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(managementService.userDetailsForm.UserTitle) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="country_code"></label>
+                <ng-multiselect-dropdown
+                  id="countryCode"
+                  [settings]="baseCtrl.countryComboboxSetting"
+                  [data]="managementService.countryList"
+                  [(ngModel)]="managementService.selectedCountries"
+                  (onSelect)="onSelectCountryCode($event)"
+                  (onDeSelect)="onDeSelectCountryCode()"
+                  name="countryCode"
+                  [placeholder]="managementService.onGetTranslationByResourceName('choose')"
+                ></ng-multiselect-dropdown>
+                <div *ngIf="baseCtrl.checkField(managementService.userDetailsForm.PhoneNumber) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="phone_number"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="managementService.userDetailsForm.PhoneNumber.Value"
+                       name="phoneNumber"
+                       (keydown.enter)="onSubmit()"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(managementService.userDetailsForm.PhoneNumber) && submitted}"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(managementService.userDetailsForm.PhoneNumber) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="email"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="managementService.userDetailsForm.Email.Value"
+                       name="email"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(managementService.userDetailsForm.Email) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(managementService.userDetailsForm.Email) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label translate="language"></label>
+                <ng-multiselect-dropdown
+                  id="language"
+                  [settings]="baseCtrl.languageComboboxSettings"
+                  [data]="managementService.languageList"
+                  [(ngModel)]="managementService.selectedLanguage"
+                  (onSelect)="onSelectLanguageCode($event)"
+                  (onDeSelect)="onDeSelectLanguageCode()"
+                  name="language"
+                  [placeholder]="managementService.onGetTranslationByResourceName('choose')"
+                ></ng-multiselect-dropdown>
+                <div *ngIf="managementService.selectedLanguage.length==0 && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-sm-6">
+
+              <label translate="email_receiver"></label><br>
+              <input type="checkbox"
+                     [(ngModel)]="managementService.userDetailsForm.EmailReceiver.Value"
+                     name="emailReceiver"
+                     autocomplete="off">
+            </div>
+            <div class="col-sm-6">
+              <label translate="is_active"></label><br>
+              <input type="checkbox"
+                     [(ngModel)]="managementService.userDetailsForm.IsActive.Value"
+                     name="isActive"
+                     (keydown.enter)="onSubmit()"
+                     autocomplete="off">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <ngb-alert *ngIf="apiServiceService.savedSuccessFully" type="success"
+                 (close)="apiServiceService.savedSuccessFully = null"
+                 style="margin-left: -15px;"
+      ><h4><i
+        class="icon fa fa-check"></i><span translate="success"></span></h4>
+        <span translate="successfully_saved"></span>
+      </ngb-alert>
+    </div>
+    <br>
+    <div class="col-sm-12" *ngIf="openedFromModal==false">
+      <a [routerLink]="['/main/api-message-list']" class="btn btn-unchoosed">
+        <i class="fas fa-arrow-left"></i> &nbsp; <span translate="turn_to_list"></span>
+      </a>
+      <br>
+      <br>
+    </div>
+    <div class="col-sm-2 col-6" *ngIf="openedFromModal==false">
+      <div class="screen-title">
+        <div>
+          <span translate="api_message"></span>
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="{'col-sm-10': !openedFromModal,'col-12': openedFromModal}">
+      <div class="text-right">
+        <button for="form"
+                type="button" class="btn btn-send"
+                [ladda]="apiServiceService.calledEndPoint"
+                (click)="onSubmit()">
+        <span
+          translate="save"></span>
+        </button>&nbsp;
+
+        <app-mdl-delete-confirm
+          *ngIf="!openedFromModal"
+          [buttonDisable]="apiMessageId == null"
+          (onConfirmDelete)="onDeleteConfirm()"></app-mdl-delete-confirm>
+      </div>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <div class="row">
+      <div [ngClass]="{'col-lg-12':openedFromModal,'col-lg-6 offset-3':
+      !openedFromModal}">
+        <form (ngSubmit)="onSubmit()" id="form">
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label translate="message_type"></label>
+                <select class="form-control"
+                        [ngClass]="{'error-input-border':baseCtrl.checkField(apiServiceService.apiMessageForm.APIMessageType) && submitted}"
+
+                        [(ngModel)]="apiServiceService.apiMessageForm.APIMessageType.Value"
+                        name="apiMessageType">
+                  <option *ngFor="let msType of apiServiceService.apiMessageTypes"
+                          value="{{msType.Id}}">{{msType.Description}}</option>
+                </select>
+                <div *ngIf="baseCtrl.checkField(apiServiceService.apiMessageForm.APIMessageType) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label translate="message_code"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="apiServiceService.apiMessageForm.MessageCode.Value"
+                       name="messageCode"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(apiServiceService.apiMessageForm.MessageCode) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(apiServiceService.apiMessageForm.MessageCode) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label translate="message_text"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="apiServiceService.apiMessageForm.MessageText.Value"
+                       name="messageText"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(apiServiceService.apiMessageForm.MessageText) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(apiServiceService.apiMessageForm.MessageText) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-sm-4" *ngFor="let trans of apiServiceService.apiMessageForm.Translations.Value">
+              <div class="form-group">
+                <label translate="translation"></label> ({{trans.LanguageName}})
+                <input type="text" class="form-control"
+                       (keydown.enter)="onSubmit()"
+                       [(ngModel)]="trans.Translation"
+                       name="translation{{trans.Translation}}"
+                       autocomplete="off">
+              </div>
+            </div>
+            <div class="col-sm-12 text-center">
+
+              <div *ngIf="baseCtrl.changeTranslationsField(apiServiceService.apiMessageForm.Translations) && submitted"
+                   class="error-required" translate="field_required">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

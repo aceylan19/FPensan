@@ -1,0 +1,116 @@
+<div class="page-container">
+  <div class="row">
+
+    <div class="col-sm-12">
+      <a [routerLink]="['/main/message-template-list']" class="btn btn-unchoosed">
+        <i class="fas fa-arrow-left"></i> &nbsp; <span translate="turn_to_list"></span>
+      </a>
+      <br>
+      <br>
+    </div>
+    <div class="col-sm-2">
+      <div class="screen-title">
+        <h5 translate="message_template"></h5>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <button for="form"
+              type="button" class="btn btn-danger"
+              data-style="expand-left"
+              (click)="onSubmit()"
+              [ladda]="dbSystemService.calledEndPoint">
+        <span translate="save"></span>
+      </button>&nbsp;
+      <app-mdl-delete-confirm
+        (onConfirmDelete)="onDeleteConfirm()">
+
+
+      </app-mdl-delete-confirm>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <form (ngSubmit)="onSubmit()" id="form">
+      <div class="row">
+        <div class="col-lg-8 offset-2">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label translate="message_account"></label>
+                <select name="messageAccount"
+                        class="form-control"
+                        [(ngModel)]="dbSystemService.messageTemplateForm.DBMessageAccountId.Value"
+                >
+                  <option *ngFor="let messageAccount of dbSystemService.messageAccountList"
+                          value="{{messageAccount.DBMessageAccountId}}">{{messageAccount.AccountName}}</option>
+                </select>
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageTemplateForm.DBMessageAccountId) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label translate="message_template_type"></label>
+                <select name="messageTemplate"
+                        class="form-control"
+                        [(ngModel)]="dbSystemService.messageTemplateForm.TemplateType.Value"
+                >
+                  <option *ngFor="let messageTemplateType of dbSystemService.templateTypes"
+                          value="{{messageTemplateType.Id}}">{{messageTemplateType.Description}}</option>
+                </select>
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageTemplateForm.TemplateType) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+
+            </div>
+            <div class="col-lg-4">
+
+              <div class="form-group">
+                <label translate="template_name"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="dbSystemService.messageTemplateForm.TemplateName.Value"
+                       (keydown.enter)="onSubmit()"
+                       name="templateName"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(dbSystemService.messageTemplateForm.TemplateName) && submitted}"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageTemplateForm.TemplateName) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-sm-3" *ngFor="let subject of dbSystemService.messageTemplateForm.Subjects.Value">
+                  <div class="form-group">
+                    <label translate="subject"></label> ({{subject.LanguageName.Value}})
+                    <input type="text" class="form-control"
+                           (keydown.enter)="onSubmit()"
+                           [(ngModel)]="subject.Translation.Value"
+                           name="subject{{subject.Language}}"
+                           autocomplete="off">
+                  </div>
+                </div>
+
+                <div *ngIf="baseCtrl.checkField(dbSystemService.messageTemplateForm.Subjects) && submitted"
+                     class="col-sm-12 error-required text-center" translate="all_translations_are_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12" *ngFor="let mb of dbSystemService.messageTemplateForm.MessageBodies.Value">
+              <label translate="body"></label> ({{mb.LanguageName.Value}})
+              <textarea class="form-control"
+                        name="messageBody{{mb.Language}}"
+                        [(ngModel)]="mb.Translation.Value"
+              ></textarea>
+              <br>
+            </div>
+            <div *ngIf="baseCtrl.checkField(dbSystemService.messageTemplateForm.MessageBodies) && submitted"
+                 class="col-sm-12 error-required text-center" translate="all_translations_are_required">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

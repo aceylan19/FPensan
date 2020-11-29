@@ -1,0 +1,48 @@
+<div class="col-lg-6 offset-lg-3 col-sm-6 col-sm-offset-3 col-md-8 offset-md-2 col-xs-12">
+  <div class="login-box">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3 col-sm-6 offset-sm-3 col-md-8 offset-md-2 col-xs-12 login-form">
+        <div class="text-center">
+          <img src="../../../assets/images/logo.png" height="50" width="250"/>
+        </div>
+        <br>
+        <br>
+        <div class="form-group">
+          <h4><span translate="login"></span></h4>
+        </div>
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{'email'|translate}}"
+                   [(ngModel)]="userServiceService.loginForm.Email.Value"
+                   [ngClass]="{'error-input-border':userServiceService.loginForm.Email.Value==null && submitted}"
+                   name="userId"
+                   (keydown.enter)="onSubmit()"
+                   autocomplete="off">
+            <div *ngIf="userServiceService.loginForm.Email.Value==null && submitted"
+                 class="error-required" translate="field_required">
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="{{'password'|translate}}"
+                   [(ngModel)]="userServiceService.loginForm.Password.Value"
+                   [ngClass]="{'error-input-border':userServiceService.loginForm.Password.Value==null && submitted}"
+                   name="password"
+                   (keydown.enter)="onSubmit()"
+                   autocomplete="off">
+            <div *ngIf="userServiceService.loginForm.Password.Value==null && submitted"
+                 class="error-required" translate="field_required">
+            </div>
+          </div>
+          <div class="form-group">
+            <app-mdl-forgot-password></app-mdl-forgot-password>
+          </div>
+          <div class="form-group">
+            <button (click)="onSubmit()"
+                    type="button" class="btn btn-send"
+                    translate="login"></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

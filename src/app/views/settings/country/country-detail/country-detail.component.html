@@ -1,0 +1,151 @@
+<div class="page-container">
+
+  <nav aria-label="breadcrumb">
+    <div class="row">
+      <div class="col-sm-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/main/operation-settings" translate="operation_settings"></a></li>
+          <li class="breadcrumb-item" aria-current="page"><a routerLink="/main/country-list"> <span
+            translate="country"></span>&nbsp;<span
+            translate="list"></span></a></li>
+          <li class="breadcrumb-item active" aria-current="page"><span translate="country"></span>&nbsp;
+            <span translate="detail"></span></li>
+        </ol>
+      </div>
+      <div class="col-sm-8">
+        <div class="btn-place-in-row">
+
+          <button for="form"
+                  type="button" class="btn btn-send"
+                  [ladda]="managementService.calledEndPoint"
+                  (click)="onSubmit()">
+            <span translate="save"></span>
+          </button>&nbsp;
+          <app-mdl-delete-confirm
+            [buttonDisable]="countryId == null"
+            (onConfirmDelete)="onDeleteConfirm()"></app-mdl-delete-confirm>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-template container-fluid">
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1">
+        <form (ngSubmit)="onSubmit()" id="form">
+          <div class="row">
+            <div class="col-sm-3" *ngFor="let c of managementService.countryDetailsForm.CountryNames.Value">
+              <div class="form-group">
+                <label translate="country_name"></label> ({{c.LanguageName.Value}})
+                <input type="text" class="form-control"
+                       [(ngModel)]="c.Translation.Value"
+                       name="countryName{{c.Language.Value}}"
+                       (keydown.enter)="onSubmit()" autocomplete="off">
+              </div>
+            </div>
+
+            <div *ngIf="baseCtrl.checkField(managementService.countryDetailsForm.CountryNames) && submitted"
+                 class="col-sm-12 error-required text-center" translate="all_translations_are_required">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label translate="country_code"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="managementService.countryDetailsForm.CountryCode.Value"
+                       name="countryCode"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(managementService.countryDetailsForm.CountryCode) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(managementService.countryDetailsForm.CountryCode) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label translate="area_code"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="managementService.countryDetailsForm.AreaCode.Value"
+                       name="areaCode"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(managementService.countryDetailsForm.AreaCode) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(managementService.countryDetailsForm.AreaCode) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label translate="phone_mask"></label>
+                <input type="text" class="form-control"
+                       [(ngModel)]="managementService.countryDetailsForm.PhoneMask.Value"
+                       name="phoneMask"
+                       [ngClass]="{'error-input-border':baseCtrl.checkField(managementService.countryDetailsForm.PhoneMask) && submitted}"
+                       (keydown.enter)="onSubmit()"
+                       autocomplete="off">
+                <div *ngIf="baseCtrl.checkField(managementService.countryDetailsForm.PhoneMask) && submitted"
+                     class="error-required" translate="field_required">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label translate="is_region_exist"></label><br>
+                <input type="checkbox"
+                       [(ngModel)]="managementService.countryDetailsForm.IsRegionExist.Value"
+                       name="isRegionExist"
+
+                       autocomplete="off">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label translate="language"></label><br>
+                <div class="form-group">
+                  <ng-multiselect-dropdown
+                    id="languageSelection"
+                    [(ngModel)]="managementService.selectedLanguage"
+                    [data]="managementService.languageList"
+                    [settings]="baseCtrl.languageComboboxSettings"
+                    (onSelect)="onItemSelect($event)"
+                    [ngModelOptions]="{standalone: true}"
+                    [placeholder]="managementService.onGetTranslationByResourceName('choose')"
+                  ></ng-multiselect-dropdown>
+                  <div *ngIf="baseCtrl.checkField(managementService.selectedLanguage.length == 0) && submitted"
+                       class="error-required" translate="field_required">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <label translate="icon"></label><br>
+              <div class="files-bordered" style="height: 40px">
+                <input type="file" style="display: none" id="icon"
+                       (change)="readThis($event)">
+                <div class="col-sm-8"
+                     (click)="onOpenFileDialog()" style="cursor: pointer">
+                  <img src="{{managementService.flagIcon}}"
+                       style="margin-top: -12px;"
+                       width="24" height="24"
+                       *ngIf="icon==null && managementService.flagIcon!=null">
+                  <img src="{{icon}}" *ngIf="icon!=null"
+                       style="margin-top: -12px;"
+                       width="24" height="24">
+                </div>
+                <div class="col-sm-3 text-center">
+                  <i class="glyphicon glyphicon-upload"
+                     (click)="onOpenFileDialog()"
+                     style="cursor: pointer"></i></div>
+              </div>
+            </div>
+
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

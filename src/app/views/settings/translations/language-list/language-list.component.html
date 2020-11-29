@@ -1,0 +1,52 @@
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-2 col-xs-12">
+      <div class="screen-title">
+        <div>
+          <span translate="languages"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 text-right">
+      <a routerLink="/main/language"
+         type="button" class="btn btn-new">
+        <i class="glyphicon glyphicon-plus"></i><span translate="new"></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="main-template container-fluid">
+
+    <table class="table table-bordered table-detailed" border="1">
+      <thead >
+      <tr>
+        <th scope="col" translate="culture_name" ></th>
+        <th scope="col" translate="language_name"></th>
+        <th scope="col" translate="short_name"></th>
+        <th scope="col" width="100px"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let language of translationService.languageList" (click)="onGotoDetail(language)">
+        <td>{{language.CultureName}}</td>
+        <td>{{language.LanguageName}}</td>
+        <td>{{language.ShortName}}</td>
+        <td align="center">
+          <a
+             [routerLink]="['/main/language', language.Id]"
+             type="button" class="btn  btn-detail">
+            <span translate="detail"></span>
+          </a>
+
+        </td>
+      </tr>
+
+      <tr *ngIf="translationService.languageList.length==0">
+        <td colspan="4" >
+          <span translate="there_is_no_data"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

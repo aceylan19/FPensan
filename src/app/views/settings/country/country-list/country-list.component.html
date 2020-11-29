@@ -1,0 +1,58 @@
+<div class="page-container">
+  <nav aria-label="breadcrumb">
+    <div class="row">
+      <div class="col-sm-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/main/operation-settings" translate="operation_settings"></a></li>
+          <li class="breadcrumb-item active" aria-current="page"><span translate="country"></span>&nbsp;
+            <span translate="list"></span></li>
+        </ol>
+      </div>
+      <div class="col-sm-8">
+        <div class="btn-place-in-row">
+          <a routerLink="/main/country"
+             type="button" class="btn btn-new" translate="new">
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="main-template container-fluid">
+
+
+    <table class="table table-bordered table-detailed" border="1">
+      <thead>
+      <tr>
+        <th scope="col" translate="country_code"></th>
+        <th scope="col" translate="country_name"></th>
+        <th scope="col" width="130"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let l of managementService.countryList"
+          (click)="onGotoDetail(l)"
+      >
+        <td data-label="test 1">{{l.CountryCode}}</td>
+        <td data-label="test 2">{{l.CountryName}}</td>
+        <td>
+          <a
+            [routerLink]="['/main/country', l.CountryId]"
+            type="button" class="btn  btn-detail">
+            <span translate="detail"></span>
+          </a>
+        </td>
+      </tr>
+      <tr *ngIf="managementService.tableLoader">
+        <td colspan="100%" align="center">
+          <img src="../../../../../assets/images/loader.gif" height="20" width="20"/>
+        </td>
+      </tr>
+      <tr *ngIf="!managementService.tableLoader && managementService.countryList.length==0">
+        <td colspan="3">
+          <span translate="there_is_no_data"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

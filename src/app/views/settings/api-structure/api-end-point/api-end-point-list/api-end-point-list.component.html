@@ -1,0 +1,102 @@
+<div class="top-header">
+
+</div>
+<div class="page-container">
+  <div class="row">
+    <div class="col-sm-12 text-right">
+      <a routerLink="/main/api-endpoint-details"
+         type="button" class="btn btn-new">
+        <i class="glyphicon glyphicon-plus"></i><span translate="new"></span>
+      </a>
+    </div>
+  </div>
+  <div class="main-template container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label translate="api_service"></label>
+          <ng-multiselect-dropdown
+            id="productionLine"
+            [settings]="baseCtrl.apiServiceComboboxSetting"
+            [data]="apiServiceService.serviceList"
+            [(ngModel)]="apiServiceService.selectedAPIServiceIds"
+            (onSelect)="onSelectApiService($event)"
+            (onDeSelect)="onDeSelectApiService()"
+            name="productionLine"
+            [placeholder]="managementService.onGetTranslationByResourceName('choose')"
+          ></ng-multiselect-dropdown>
+
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label translate="search"></label>
+          <input type="text" class="form-control"
+                 [(ngModel)]="requestParams.SearchText"
+                 (keydown.enter)="onSearch()"
+                 name="search"
+                 autocomplete="off">
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button class="btn btn-send" translate="search"
+                style="margin-top: 20px"
+                (click)="onSearch()"></button>
+      </div>
+    </div>
+    <table class="table table-bordered table-detailed" border="1">
+      <thead>
+      <tr>
+        <th scope="col" translate="api_service_name"></th>
+        <th scope="col" translate="endpoint_code" width="120"></th>
+        <th scope="col" translate="endpoint_name"></th>
+        <th scope="col" width="100"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="let l of apiServiceService.endPointList| slice: (page-1) * baseCtrl.dataPerPage : (page-1) * baseCtrl.dataPerPage + baseCtrl.dataPerPage"
+        (click)="onGotoDetail(l)"
+      >
+        <td>{{l.ServiceName}}</td>
+        <td>{{l.EndpointCode}}</td>
+        <td>{{l.EndpointName}}</td>
+        <td>
+          <a
+            [routerLink]="['/main/api-endpoint-details', l.APIEndpointId]"
+            type="button" class="btn  btn-detail">
+            <span translate="detail"></span>
+          </a>
+        </td>
+      </tr>
+      <tr *ngIf="apiServiceService.endPointList.length==0">
+        <td colspan="100%">
+          <span translate="there_is_no_data"></span>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot *ngIf="apiServiceService.endPointList?.length!=0">
+      <tr>
+        <td colspan="100%">
+          <div class="row">
+            <div class="col-7">
+              <ngb-pagination class="d-inline-block" [collectionSize]="apiServiceService.endPointList.length"
+                              [pageSize]="baseCtrl.dataPerPage"
+                              [maxSize]="baseCtrl.paginationPageSize"
+                              [(page)]="page" [boundaryLinks]="true">
+              </ngb-pagination>
+            </div>
+            <div class="col-5 pt-2 text-right">
+                <span>
+                  {{baseCtrl.dataPerPage * (page - 1) + 1}} - {{baseCtrl.dataPerPage * page}}
+                  (<span translate="total"></span> {{apiServiceService.endPointList.length}} <span
+                  translate="records"></span>)
+                </span>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
