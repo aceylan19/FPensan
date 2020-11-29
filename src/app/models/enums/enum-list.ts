@@ -26,7 +26,7 @@ export class EnumsList {
       ]
     },
     {
-      text: 'Account',icon:'fas fa-clipboard-check', url: '#', submenus: [
+      text: 'Account',icon:'fas fa-users', url: '#', submenus: [
         {
           text: 'account_groups', url: null, icon:'fas fa-user-friends'
         },
@@ -39,7 +39,7 @@ export class EnumsList {
       ]
     },
     {
-      text: 'Stock',icon:'fas fa-clipboard-check', url: '#', submenus: [
+      text: 'Stock',icon:'fas fa-warehouse', url: '#', submenus: [
         {
           text: 'stock_categories', url: null, icon:'fas fa-th'
         },
@@ -61,21 +61,21 @@ export class EnumsList {
       ]
     },
     {
-      text: 'reports',icon:'fas fa-clipboard-check', url: '#', submenus: [
+      text: 'reports',icon:'fas fa-chart-line', url: '#', submenus: [
         {
           text: 'report_1', url: null, icon:'far fa-chart-bar'
         },
         {
-          text: 'report_2', url: null, icon:'far fa-chart-bar'
+          text: 'report_2', url: null, icon:'fas fa-clipboard-check'
         },
         {
-          text: 'report_3', url: null, icon:'far fa-chart-bar'
+          text: 'report_3', url: null, icon:'fas fa-clipboard-check'
         },
         {
           text: 'report_4', url: null, icon:'far fa-chart-bar'
         },
         {
-          text: 'report_5', url: null, icon:'far fa-chart-bar'
+          text: 'report_5', url: null, icon:'fas fa-clipboard-check'
         },
         
       ]
@@ -86,24 +86,24 @@ export class EnumsList {
           text: 'system', url: null, icon:'fas fa-tools'
         },
         {
-          text: 'translation', url: null, icon:'fas fa-flag'
+          text: 'translation', url: null, icon:'far fa-flag'
         },
         {
           text: 'security', url: null, icon:'fas fa-key'
         },
         {
-          text: 'geography', url: null, icon:'fas fa-route',submenus: [
+          text: 'geography', url: null, icon:'far fa-route',submenus: [
             {
-              text: 'countries', url: null, icon:'fas fa-tools'
+              text: 'countries', url: null, icon:'far fa-tools'
             },
             {
-              text: 'teams', url: null, icon:'fas fa-tools'
+              text: 'teams', url: null, icon:'far fa-tools'
             },
             {
-              text: 'cities', url: null, icon:'fas fa-tools'
+              text: 'cities', url: null, icon:'far fa-tools'
             },
             {
-              text: 'regions', url: null, icon:'fas fa-tools'
+              text: 'regions', url: null, icon:'far fa-tools'
             },
           ]
         }
