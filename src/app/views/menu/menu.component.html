@@ -29,11 +29,17 @@
           <li *ngFor="let ss of menu.submenus;"
               style="width: 200px"
               [ngClass]="{'dropdown-submenu':ss.submenus != null}">
-            <a class="dropdown-item" routerLink="{{ss.url}}" translate="{{ss.text}}" *ngIf="ss.submenus == null"></a>
+            <a class="dropdown-item" routerLink="{{ss.url}}" translate="{{ss.text}}" *ngIf="ss.submenus == null">
+              <i class="{{ss.icon}}"style="margin-right:5px;"></i> {{ss.text}}
+            
+            </a>
             <a class="dropdown-item dropdown-toggle" translate="{{ss.text}}" *ngIf="ss.submenus != null"></a>
             <ul class="dropdown-menu" *ngIf="ss.submenus != null">
               <li><a class="dropdown-item" routerLink="{{sub.url}}" *ngFor="let sub of ss.submenus;"
-                     translate="{{sub.text}}"></a></li>
+                     translate="{{sub.text}}">
+                     <i class="{{sub.icon}}"style="margin-right:5px;"></i>  {{sub.text}}
+                    </a>
+                  </li>
             </ul>
           </li>
         </ul>

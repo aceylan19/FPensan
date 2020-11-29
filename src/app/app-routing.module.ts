@@ -27,7 +27,8 @@ import {ApiEndPointListComponent} from './views/settings/api-structure/api-end-p
 import {ApiEndPointDetailsComponent} from './views/settings/api-structure/api-end-point/api-end-point-details/api-end-point-details.component';
 import {ApiMessageListComponent} from './views/settings/api-structure/api-message/api-message-list/api-message-list.component';
 import {ApiMessageDetailsComponent} from './views/settings/api-structure/api-message/api-message-details/api-message-details.component';
-
+import {CityListComponent} from './views/settings/city/city-list/city-list.component';
+import {CityDetailComponent} from './views/settings/city/city-detail/city-detail.component';
 
 const routes: Routes = [
   {
@@ -177,6 +178,14 @@ const routes: Routes = [
       {
         path: 'api-message-details/:apiMessageId',
         component: ApiMessageDetailsComponent
+      },
+      {
+        path: 'city',
+        component: CityListComponent
+      },
+      {
+        path: 'city-detail',
+        component: CityDetailComponent
       }
     ],
   },

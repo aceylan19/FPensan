@@ -57,6 +57,9 @@ import { ApiEndPointDetailsComponent } from './views/settings/api-structure/api-
 import {ApiMessageListComponent} from './views/settings/api-structure/api-message/api-message-list/api-message-list.component';
 import { ApiMessageDetailsComponent } from './views/settings/api-structure/api-message/api-message-details/api-message-details.component';
 import { MdlNewMessageComponent } from './views/modals/mdl-new-message/mdl-new-message.component';
+import { CityDetailComponent } from './views/settings/city/city-detail/city-detail.component';
+import { CityListComponent } from './views/settings/city/city-list/city-list.component';
+
 
 @NgModule({
   declarations: [
@@ -93,7 +96,9 @@ import { MdlNewMessageComponent } from './views/modals/mdl-new-message/mdl-new-m
     ApiEndPointDetailsComponent,
     ApiMessageListComponent,
     ApiMessageDetailsComponent,
-    MdlNewMessageComponent
+    MdlNewMessageComponent,
+    CityDetailComponent,
+    CityListComponent,
   ],
   imports: [
     BrowserModule,

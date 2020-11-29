@@ -6,111 +6,105 @@ export class EnumsList {
     {
       text: 'Order',icon:'fas fa-clipboard-check', url: '#', submenus: [
         {
-          text: 'translations', url: null, submenus: [
-            {text: 'languages', url: '/main/language-list'},
-            {text: 'static_translations', url: '/main/static-translation'},
-            {text: 'dynamic_translations', url: '/main/dynamic-translation'},
-            {text: 'enum_translations', url: '/main/enum-translation'}
-          ]
+          text: 'new_order', url: null, icon:'fas fa-plus'
         },
         {
-          text: 'system', url: null, submenus: [
-            {text: 'file_types', url: '/main/file-type-list'},
-            {text: 'countries', url: '/main/country-list'},
-            {text: 'message_accounts', url: '/main/message-account-list'},
-            {text: 'message_templates', url: '/main/message-template-list'},
-            {text: 'system_parameters', url: '/main/sys-parameters'}
-          ]
+          text: 'order_list', url: null, icon:'fas fa-clipboard'
         },
         {
-          text: 'api', url: null, submenus: [
-            {text: 'api_services', url: '/main/api-service-list'},
-            {text: 'endpoints', url: '/main/api-endpoint-list'},
-            {text: 'api_messages', url: '/main/api-message-list'},
-          ]
+          text: 'order_approvement', url: null, icon: 'fas fa-tasks'
+        },
+        {
+          text: 'order_archieve', url: null, icon: 'fas fa-archive'
+        },
+        {
+          text: 'campaings', url: null, icon: 'fas fa-tag'
+        },
+        {
+          text: 'fairs', url: null, icon: 'fas fa-star'
         }
       ]
     },
     {
       text: 'Account',icon:'fas fa-clipboard-check', url: '#', submenus: [
         {
-          text: 'translations', url: null, submenus: [
-            {text: 'languages', url: '/main/language-list'},
-            {text: 'static_translations', url: '/main/static-translation'},
-            {text: 'dynamic_translations', url: '/main/dynamic-translation'},
-            {text: 'enum_translations', url: '/main/enum-translation'}
-          ]
+          text: 'account_groups', url: null, icon:'fas fa-user-friends'
         },
         {
-          text: 'system', url: null, submenus: [
-            {text: 'file_types', url: '/main/file-type-list'},
-            {text: 'countries', url: '/main/country-list'},
-            {text: 'message_accounts', url: '/main/message-account-list'},
-            {text: 'message_templates', url: '/main/message-template-list'},
-            {text: 'system_parameters', url: '/main/sys-parameters'}
-          ]
+          text: 'account', url: null, icon:'fas fa-user'
         },
         {
-          text: 'api', url: null, submenus: [
-            {text: 'api_services', url: '/main/api-service-list'},
-            {text: 'endpoints', url: '/main/api-endpoint-list'},
-            {text: 'api_messages', url: '/main/api-message-list'},
-          ]
+          text: 'retailer_approviment', url: null, icon:'fas fa-user-check'
         }
       ]
     },
     {
       text: 'Stock',icon:'fas fa-clipboard-check', url: '#', submenus: [
         {
-          text: 'translations', url: null, submenus: [
-            {text: 'languages', url: '/main/language-list'},
-            {text: 'static_translations', url: '/main/static-translation'},
-            {text: 'dynamic_translations', url: '/main/dynamic-translation'},
-            {text: 'enum_translations', url: '/main/enum-translation'}
-          ]
+          text: 'stock_categories', url: null, icon:'fas fa-th'
         },
         {
-          text: 'system', url: null, submenus: [
-            {text: 'file_types', url: '/main/file-type-list'},
-            {text: 'countries', url: '/main/country-list'},
-            {text: 'message_accounts', url: '/main/message-account-list'},
-            {text: 'message_templates', url: '/main/message-template-list'},
-            {text: 'system_parameters', url: '/main/sys-parameters'}
-          ]
+          text: 'stock_groups', url: null, icon:'fas fa-layer-group'
         },
         {
-          text: 'api', url: null, submenus: [
-            {text: 'api_services', url: '/main/api-service-list'},
-            {text: 'endpoints', url: '/main/api-endpoint-list'},
-            {text: 'api_messages', url: '/main/api-message-list'},
-          ]
+          text: 'stock_sub_groups', url: null, icon:'fas fa-ellipsis-h'
+        },
+        {
+          text: 'brands', url: null, icon:'fas fa-star'
+        },
+        {
+          text: 'units', url: null, icon:'fas fa-folder-open'
+        },
+        {
+          text: 'stocks', url: null, icon:'fas fa-box'
         }
+      ]
+    },
+    {
+      text: 'reports',icon:'fas fa-clipboard-check', url: '#', submenus: [
+        {
+          text: 'report_1', url: null, icon:'far fa-chart-bar'
+        },
+        {
+          text: 'report_2', url: null, icon:'far fa-chart-bar'
+        },
+        {
+          text: 'report_3', url: null, icon:'far fa-chart-bar'
+        },
+        {
+          text: 'report_4', url: null, icon:'far fa-chart-bar'
+        },
+        {
+          text: 'report_5', url: null, icon:'far fa-chart-bar'
+        },
+        
       ]
     },
     {
       text: 'Settings',icon:'fas fa-clipboard-check', url: '#', submenus: [
         {
-          text: 'translations', url: null, submenus: [
-            {text: 'languages', url: '/main/language-list'},
-            {text: 'static_translations', url: '/main/static-translation'},
-            {text: 'dynamic_translations', url: '/main/dynamic-translation'},
-            {text: 'enum_translations', url: '/main/enum-translation'}
-          ]
+          text: 'system', url: null, icon:'fas fa-tools'
         },
         {
-          text: 'system', url: null, submenus: [
-            {text: 'file_types', url: '/main/file-type-list'},
-            {text: 'countries', url: '/main/country-list'},
-            {text: 'message_accounts', url: '/main/message-account-list'},
-            {text: 'message_templates', url: '/main/message-template-list'},
-            {text: 'system_parameters', url: '/main/sys-parameters'}
-          ]
+          text: 'translation', url: null, icon:'fas fa-flag'
         },
         {
-          text: 'api', url: null, submenus: [
-            {text: 'api_services', url: '/main/api-service-list'},
-            {text: 'endpoints', url: '/main/api-endpoint-list'},
-            {text: 'api_messages', url: '/main/api-message-list'},
+          text: 'security', url: null, icon:'fas fa-key'
+        },
+        {
+          text: 'geography', url: null, icon:'fas fa-route',submenus: [
+            {
+              text: 'countries', url: null, icon:'fas fa-tools'
+            },
+            {
+              text: 'teams', url: null, icon:'fas fa-tools'
+            },
+            {
+              text: 'cities', url: null, icon:'fas fa-tools'
+            },
+            {
+              text: 'regions', url: null, icon:'fas fa-tools'
+            },
           ]
         }
       ]
